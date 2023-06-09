@@ -3,6 +3,8 @@ import { randomBytes, randomUUID } from "crypto";
 import NextAuth from "next-auth/next";
 import CredentialsProvider from "next-auth/providers/credentials";
 
+const BASE_URL = process.env.NEXTAUTH_URL
+
 const AuthHandler = NextAuth({
   providers: [
     CredentialsProvider({
@@ -24,7 +26,7 @@ const AuthHandler = NextAuth({
           username: credentials?.username,
           password: credentials?.password,
         };
-        const res = await fetch("http://localhost:3000/api/users/login", {
+        const res = await fetch(`${BASE_URL}/api/users/login`, {
           method: "POST",
           body: JSON.stringify(credentialsObject),
           headers: {
@@ -70,7 +72,8 @@ const AuthHandler = NextAuth({
       token: any;
       user: any;
     }) {
-
+      
+      
       session.user = {
         username: token.username,
         accessToken: token.accessToken,
