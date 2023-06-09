@@ -16,17 +16,17 @@ export default function Login() {
   
 
   const handleLogin: SubmitHandler<AuthType> = async (data) => {
-    const res = await signIn("credentials", { callbackUrl: callbackUrl, ...data ,redirect: false});
-    console.log(res?.status);
+    signIn("credentials", { callbackUrl: callbackUrl, ...data ,redirect: false});
+    // console.log(res?.status);
     
-    if (res?.ok){
-        setSuccess("Login Successful")
-        console.log(session);
+    // if (res?.ok){
+    //     setSuccess("Login Successful")
+    //     console.log(session);
         
-        window.location.href  = callbackUrl
-    }else {
-      setFormError("Invalid credentials")
-    }
+    //     window.location.href  = callbackUrl
+    // }else {
+    //   setFormError("Invalid credentials")
+    // }
     
     
   };
