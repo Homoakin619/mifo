@@ -20,11 +20,13 @@ export default function Login() {
     console.log(res?.status);
     
     if (res?.ok){
+      window.location.href = callbackUrl
       if (res?.url) {
         console.log("successful");
         console.log(res.status);
         
         setSuccess("Login Successful")
+        alert("successful")
         window.location.href  = callbackUrl
       }  
     }else {
