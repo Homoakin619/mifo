@@ -9,10 +9,9 @@ export default function Login() {
   const loginForm = useForm<AuthType>();
   const { register, handleSubmit } = loginForm;
   const params = useSearchParams();
-  const callbackUrl = params.get("callbackUrl") ?? "/";
+  const callbackUrl = params.get("callbackUrl") ?? "/admins/music/new";
   const [formError,setFormError] = useState('')
   const [success,setSuccess] = useState('')
-  const router = useRouter()
   
 
   const handleLogin: SubmitHandler<AuthType> = async (data) => {
@@ -20,18 +19,9 @@ export default function Login() {
     console.log(res?.status);
     
     if (res?.ok){
-      window.location.href = callbackUrl
-      if (res?.url) {
-        console.log("successful");
-        console.log(res.status);
-        
         setSuccess("Login Successful")
-        alert("successful")
         window.location.href  = callbackUrl
-      }  
     }else {
-      console.log("Bad Data");
-      
       setFormError("Invalid credentials")
     }
     

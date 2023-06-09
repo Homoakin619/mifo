@@ -1,4 +1,5 @@
 "use client";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 
 
@@ -7,6 +8,9 @@ export default function NewMusicPage() {
 
   const apiKey = process.env.NEXT_PUBLIC_CLOUDINARY_API_KEY as string;
   const cloudname = process.env.NEXT_PUBLIC_CLOUDINARY_NAME;
+  const [formError,setFormError] = useState('')
+  const [success,setSuccess] = useState('')
+  
 
   async function uploadMusic(data: MusicFormPayload) {
     const imageFile = data.image[0];
@@ -39,7 +43,7 @@ export default function NewMusicPage() {
       const audioResponse = await fetch(url, { method: "POST", body: audioFormData });
       const audioResult = await audioResponse.json();
       const audioUrl = audioResult.secure_url
-      
+
       data.image = imageUrl;
       data.audio = audioUrl;
       const response = await fetch("/api/music/create",{
@@ -51,9 +55,9 @@ export default function NewMusicPage() {
       })
       if (response.ok) {
         reset()
-        alert("Music Uploaded SuccessFully")
+        setSuccess("Music Uploaded SuccessFully")
       }else {
-        alert("There was an error uploading the music try again")
+        setFormError("There was an error uploading the music try again")
       }
     
     } catch (error) {
@@ -70,6 +74,10 @@ export default function NewMusicPage() {
       <div className="col-6" style={{ minHeight: "150px" }}>
         <h4>Music Upload Form</h4>
         <form method="POST" onSubmit={handleSubmit(uploadMusic)}>
+        <div>
+            <span style={{ color: "red"}}>{ formError }</span>
+            <span style={{ color: "green"}}>{ success }</span>
+          </div>
           <div className="mb-3">
             <label htmlFor="titleInput" className="form-label">
               Music Title

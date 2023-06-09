@@ -28,7 +28,7 @@ export default function Navbar() {
             <span className="navbar-text me-3">Logged In!</span>
             <a className="btn btn-sm btn-danger" onClick={() => signOut({callbackUrl:"/"})}>Log Out</a>
           </div>
-        ) : null}
+        ) : <span>Unauthenticated</span>}
       </div>
     </nav>
   );
