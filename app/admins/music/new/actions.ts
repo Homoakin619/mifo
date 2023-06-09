@@ -1,6 +1,8 @@
 "use server";
 import cloudinary from "@/lib/cloudinary";
 
+const BASE_URL = process.env.NEXTAUTH_URL
+
   {/** @ts-expect-error */}
 export async function processPost(data) {
 
@@ -13,7 +15,7 @@ export async function processPost(data) {
         release_date: data.release_date.toString(),
         image: imgUrl
       };
-    const res = await fetch("http://localhost:3001/api/music/create",{
+    const res = await fetch(`${BASE_URL}/api/music/create`,{
         method: 'POST',
         body: JSON.stringify(musicData),
         headers: {
