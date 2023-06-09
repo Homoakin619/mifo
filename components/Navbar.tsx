@@ -4,7 +4,6 @@ import { signOut, useSession } from "next-auth/react";
 export default function Navbar() {
   const { data: session, status } = useSession();
   const loading = status == "loading";
-  console.log(session);
   
   return (
     <nav className="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
@@ -30,7 +29,7 @@ export default function Navbar() {
             <span className="navbar-text me-3">Logged In!</span>
             <a className="btn btn-sm btn-danger" onClick={() => signOut({callbackUrl:"/"})}>Log Out</a>
           </div>
-        ) : <span>Unauthenticated</span>}
+        ) : <span></span>}
       </div>
     </nav>
   );
