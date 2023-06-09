@@ -80,6 +80,8 @@ const AuthHandler = NextAuth({
         accessToken: token.accessToken,
       };
       session.accessToken = token.accessToken;
+      console.log(session);
+      
       return session;
     },
   },

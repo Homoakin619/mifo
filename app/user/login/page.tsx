@@ -1,5 +1,5 @@
 "use client"
-import { signIn } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -12,6 +12,7 @@ export default function Login() {
   const callbackUrl = params.get("callbackUrl") ?? "/admins/music/new";
   const [formError,setFormError] = useState('')
   const [success,setSuccess] = useState('')
+  const {data: session} = useSession()
   
 
   const handleLogin: SubmitHandler<AuthType> = async (data) => {
@@ -20,6 +21,8 @@ export default function Login() {
     
     if (res?.ok){
         setSuccess("Login Successful")
+        console.log(session);
+        
         window.location.href  = callbackUrl
     }else {
       setFormError("Invalid credentials")
