@@ -9,6 +9,7 @@ const AuthHandler = NextAuth({
 
       name: "Credentials",
       id: "credentials",
+      type: "credentials",
 
       credentials: {
         username: {
@@ -31,13 +32,10 @@ const AuthHandler = NextAuth({
           },
         });
         const user = await res.json();
-
-        if (user) {
-          log(user)
-          console.log(user)
+        
+        if (res.ok && user) {
           return user;
         } else {
-     
           return null;
         }
       },
@@ -60,7 +58,6 @@ const AuthHandler = NextAuth({
       if (user) {
         token.accessToken = user.token;
         token.username = user.username;
-        // token.role = user.role;
       }
       return token;
     },
@@ -73,15 +70,11 @@ const AuthHandler = NextAuth({
       token: any;
       user: any;
     }) {
-      session.user.username = "token.username";
+
       session.user = {
-        ...session.user,
-        // role: token.role,
+        username: token.username,
         accessToken: token.accessToken,
       };
-      session.accessToken = token.accessToken;
-      console.log(session);
-      
       return session;
     },
   },
