@@ -3,7 +3,6 @@ import { signIn } from "next-auth/react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
 
 
 export default function Login() {
@@ -14,7 +13,7 @@ export default function Login() {
   const [formError,setFormError] = useState('')
   const [success,setSuccess] = useState('')
   const router = useRouter()
-  const navigate = useNavigate()
+  
 
   const handleLogin: SubmitHandler<AuthType> = async (data) => {
     const res = await signIn("credentials", { callbackUrl: callbackUrl, ...data ,redirect: false});
@@ -26,7 +25,7 @@ export default function Login() {
         console.log(res.status);
         
         setSuccess("Login Successful")
-        navigate(callbackUrl)
+        window.location.href  = callbackUrl
       }  
     }else {
       console.log("Bad Data");
