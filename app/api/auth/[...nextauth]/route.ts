@@ -1,8 +1,6 @@
-import axios from "axios";
 import { randomBytes, randomUUID } from "crypto";
 import NextAuth from "next-auth/next";
 import CredentialsProvider from "next-auth/providers/credentials";
-import { headers } from "next/dist/client/components/headers";
 
 const AuthHandler = NextAuth({
   providers: [
