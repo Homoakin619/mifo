@@ -15,13 +15,16 @@ export default function Login() {
 
   const handleLogin: SubmitHandler<AuthType> = async (data) => {
     const res = await signIn("credentials", { callbackUrl: callbackUrl, ...data ,redirect: false});
-    if (res?.error) {
-      setFormError("Invalid Credentials")
+    if (res?.ok){
+      if (res?.url) {
+        setSuccess("Login Successful")
+        router.push(res.url)
+      }  
     }
-    if (res?.url) {
-      setSuccess("Login Successful")
-      router.push(res.url)
-    }
+    // if (res?.error) {
+    //   setFormError("Invalid Credentials")
+    // }
+    
   };
 
   return (
