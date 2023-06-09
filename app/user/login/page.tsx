@@ -18,12 +18,10 @@ export default function Login() {
     if (res?.ok){
       if (res?.url) {
         setSuccess("Login Successful")
-        router.push(res.url)
+        router.push(callbackUrl)
       }  
     }
-    // if (res?.error) {
-    //   setFormError("Invalid Credentials")
-    // }
+    
     
   };
 
