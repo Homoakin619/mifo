@@ -3,12 +3,12 @@ import jwt from "jsonwebtoken"
 import User from "@/models/User";
 import bcrypt from "bcrypt"
 import getConfig from "next/config";
+import { NextResponse } from "next/server";
 
 
 
 export const POST = async (req: any) => {
     const data = await req.json();
-    console.log(data);
     
     const secret = process.env.CONFIG_SECRET
     
@@ -23,7 +23,7 @@ export const POST = async (req: any) => {
                 const datas = {
                     ...userExists.toJSON(),token
                 }
-                return new Response(JSON.stringify(datas),{status:200})
+                return new NextResponse(JSON.stringify(datas),{status:200})
             }
         }else {
             console.log("User does not exist")

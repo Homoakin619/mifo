@@ -1,3 +1,4 @@
+import { log } from "console";
 import { randomBytes, randomUUID } from "crypto";
 import NextAuth from "next-auth/next";
 import CredentialsProvider from "next-auth/providers/credentials";
@@ -32,7 +33,8 @@ const AuthHandler = NextAuth({
         const user = await res.json();
 
         if (user) {
-     
+          log(user)
+          console.log(user)
           return user;
         } else {
      
@@ -71,7 +73,7 @@ const AuthHandler = NextAuth({
       token: any;
       user: any;
     }) {
-      session.user.username = token.username;
+      session.user.username = "token.username";
       session.user = {
         ...session.user,
         // role: token.role,
