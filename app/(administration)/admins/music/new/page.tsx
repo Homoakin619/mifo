@@ -12,7 +12,7 @@ export default function NewMusicPage() {
   const [formError, setFormError] = useState("");
   const [success, setSuccess] = useState("");
   const router = useRouter()
-  const [btnStatus,setBtnStatus] = useState<Boolean>(false);
+  const [btnStatus,setBtnStatus] = useState(false);
   const [info,setInfo] = useState("");
 
   async function uploadMusic(data: MusicFormPayload) {
