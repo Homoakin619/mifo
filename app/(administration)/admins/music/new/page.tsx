@@ -1,26 +1,23 @@
 "use client";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import {toast,ToastContainer} from "react-toastify"
-
+import { toast, ToastContainer } from "react-toastify";
 
 export default function NewMusicPage() {
   const { handleSubmit, register, reset } = useForm<MusicFormPayload>();
 
   const apiKey = process.env.NEXT_PUBLIC_CLOUDINARY_API_KEY as string;
   const cloudname = process.env.NEXT_PUBLIC_CLOUDINARY_NAME;
-  const [formError,setFormError] = useState('')
-  const [success,setSuccess] = useState('')
-  
+  const [formError, setFormError] = useState("");
+  const [success, setSuccess] = useState("");
 
   async function uploadMusic(data: MusicFormPayload) {
     const imageFile = data.image[0];
-    const audioFile = data.audio[0]
+    const audioFile = data.audio[0];
     const res1 = await fetch("/api/sign", { method: "POST" });
     const signatureData = await res1.json();
 
-    const url =
-      "https://api.cloudinary.com/v1_1/" + cloudname + "/auto/upload";
+    const url = "https://api.cloudinary.com/v1_1/" + cloudname + "/auto/upload";
 
     const imageFormData = new FormData();
     imageFormData.append("file", imageFile);
@@ -37,38 +34,57 @@ export default function NewMusicPage() {
     audioFormData.append("folder", "mahbub_foundation");
 
     try {
-      const imageResponse = await fetch(url, { method: "POST", body: imageFormData });
+      const imageResponse = await fetch(url, {
+        method: "POST",
+        body: imageFormData,
+      });
       const imageRresult = await imageResponse.json();
-      const imageUrl = imageRresult.secure_url
+      const imageUrl = imageRresult.secure_url;
 
-      const audioResponse = await fetch(url, { method: "POST", body: audioFormData });
+      const audioResponse = await fetch(url, {
+        method: "POST",
+        body: audioFormData,
+      });
       const audioResult = await audioResponse.json();
-      const audioUrl = audioResult.secure_url
+      const audioUrl = audioResult.secure_url;
 
       data.image = imageUrl;
       data.audio = audioUrl;
-      const response = await fetch("/api/music/create",{
-        method: 'POST',
+      const response = await fetch("/api/music/create", {
+        method: "POST",
         body: JSON.stringify(data),
         headers: {
-          "Content-Type": "application/json"
-        }
-      })
+          "Content-Type": "application/json",
+        },
+      });
       if (response.ok) {
-        reset()
-        toast("Music Created Succesfully",{
+        if (response.url) {
+          console.log(response.body);
+          console.log(response.json());
+          
+          reset();
+          toast("Music Created Succesfully", {
+            type: "success",
+            theme: "colored",
+            autoClose: 5000,
+          });
+        }
+      } else {
+        
+        toast("There was an error uploading the music try again", {
+          type: "error",
           theme: "colored",
-          autoClose: 5000
-        })
-      }else {
-        setFormError("There was an error uploading the music try again")
+          autoClose: 5000,
+        });
       }
-    
     } catch (error) {
-      alert("There was an error uploading the music try again")
+      toast("There was an error uploading the music try again", {
+        type: "error",
+        theme: "colored",
+        autoClose: 5000,
+      });
     }
   }
-
 
   return (
     <div
@@ -78,9 +94,9 @@ export default function NewMusicPage() {
       <div className="col-6" style={{ minHeight: "150px" }}>
         <h4>Music Upload Form</h4>
         <form method="POST" onSubmit={handleSubmit(uploadMusic)}>
-        <div>
-            <span style={{ color: "red"}}>{ formError }</span>
-            <span style={{ color: "green"}}>{ success }</span>
+          <div>
+            <span style={{ color: "red" }}>{formError}</span>
+            <span style={{ color: "green" }}>{success}</span>
           </div>
           <div className="mb-3">
             <label htmlFor="titleInput" className="form-label">
@@ -133,18 +149,18 @@ export default function NewMusicPage() {
             </div>
           </div>
           <div className="mb-3">
-              <label htmlFor="audioFile" className="form-label">
-                Audio File
-              </label>
-              <input
-                type="file"
-                accept="audio/*"
-                className="form-control"
-                // name="image"
-                {...register("audio")}
-                id="audioFile"
-              />
-            </div>
+            <label htmlFor="audioFile" className="form-label">
+              Audio File
+            </label>
+            <input
+              type="file"
+              accept="audio/*"
+              className="form-control"
+              // name="image"
+              {...register("audio")}
+              id="audioFile"
+            />
+          </div>
           <div className="mb-3">
             <label htmlFor="id_address">Description</label>
             <textarea
@@ -161,7 +177,7 @@ export default function NewMusicPage() {
           </button>
         </form>
       </div>
-      <ToastContainer/>
+      <ToastContainer />
     </div>
   );
 }

@@ -1,6 +1,6 @@
 import { connectDb } from "@/lib/database";
 import Music from "@/models/Music";
-import { NextRequest } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
 
 export const POST = async (req: NextRequest) => {
@@ -20,12 +20,14 @@ export const POST = async (req: NextRequest) => {
             })
             await newMusic.save()
             return new Response(JSON.stringify(newMusic),{status: 201})
+        }else {
+            return new NextResponse("Music exists, choose another title",{status:400})
         }
-        return new Response("hi",{status: 102})
+        
     } catch (error) {
         console.log(error);
         
-        return new Response(""+error,{status: 401})
+        return new NextResponse(""+error,{status: 400})
     }
     // return new Response("hello",{status: 201})
 }
