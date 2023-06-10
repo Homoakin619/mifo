@@ -1,7 +1,7 @@
-import Navbar from "@/components/Navbar";
 
 import "bootstrap/dist/css/bootstrap.css";
 import "./globals.css";
+import 'react-toastify/dist/ReactToastify.css';
 import Provider from "@/components/Provider";
 
 export const metadata = {
@@ -28,7 +28,6 @@ export default function RootLayout({
       </head>
       <body>
         <Provider session={session} >
-        <Navbar />
         {children}
         </Provider>
       </body>

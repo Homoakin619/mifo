@@ -1,4 +1,5 @@
-import AuthRoute from "@/components/AuthRoute";
+import AuthNavbar from "@/components/AuthNavbar";
+
 
 export const metadata = {
   title: "MIFO | Admin",
@@ -6,5 +7,9 @@ export const metadata = {
 };
 
 export default function AuthRoot({ children }: { children: React.ReactNode }) {
-  return <AuthRoute>{children}</AuthRoute>;
+  return <>
+  <AuthNavbar/>
+  {children}
+  </>
+  
 }

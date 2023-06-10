@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import {toast,ToastContainer} from "react-toastify"
 
 
 export default function NewMusicPage() {
@@ -55,7 +56,10 @@ export default function NewMusicPage() {
       })
       if (response.ok) {
         reset()
-        setSuccess("Music Uploaded SuccessFully")
+        toast("Music Created Succesfully",{
+          theme: "colored",
+          autoClose: 5000
+        })
       }else {
         setFormError("There was an error uploading the music try again")
       }
@@ -157,6 +161,7 @@ export default function NewMusicPage() {
           </button>
         </form>
       </div>
+      <ToastContainer/>
     </div>
   );
 }

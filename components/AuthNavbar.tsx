@@ -1,7 +1,8 @@
 "use client";
-import { signOut } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 
-export default function Navbar() {
+export default function AuthNavbar() {
+    const {data:session} = useSession()
 
   return (
     <nav className="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
@@ -22,6 +23,12 @@ export default function Navbar() {
           <span className="navbar-toggler-icon"></span>
         </button>
        
+          <div className="collapse navbar-collapse" id="navbarText">
+            <ul className="navbar-nav me-auto mb-2 mb-lg-0"></ul>
+            <span className="navbar-text me-3">Welcome {session?.user.username}!</span>
+            <a className="btn btn-sm btn-danger" onClick={() => signOut({callbackUrl:"/"})}>Log Out</a>
+          </div>
+        
       </div>
     </nav>
   );

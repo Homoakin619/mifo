@@ -1,12 +1,14 @@
 import { fetchAllMusics } from "@/utils/utilities";
 import { Suspense } from "react";
 import Songs from "@/components/Musics";
+import Navbar from "@/components/Navbar";
 
 export default async function Home() {
   const data = await fetchAllMusics();
   const music = JSON.parse(data)
   return (
     <>
+    <Navbar/>
     <div className="d-flex align-items-center justify-content-center banner" style={{background: "#e3f2fd"}} >
       <div className="d-flex justify-content-center flex-column">
         <h1 className="banner-head text-center">Mahbub Islamic Foundation</h1>

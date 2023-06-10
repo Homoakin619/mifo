@@ -1,4 +1,4 @@
-import { sign_request } from "@/lib/middleware";
+import { sign_request } from "@/lib/middlewares";
 import { NextRequest, NextResponse } from "next/server";
 
 export const POST = async (req: NextRequest) => {
