@@ -12,10 +12,14 @@ export default function NewMusicPage() {
   const [formError, setFormError] = useState("");
   const [success, setSuccess] = useState("");
   const router = useRouter()
+  const [btnStatus,setBtnStatus] = useState<Boolean>(false);
+  const [info,setInfo] = useState("");
 
   async function uploadMusic(data: MusicFormPayload) {
-    document.getElementById("submit-btn").disabled = true;
-    document.getElementById("info").innerHTML = "Processing upload please wait";
+    if (document) {
+      setBtnStatus(true)
+      setInfo("Processing upload please wait")
+    }
 
     const imageFile = data.image[0];
     const audioFile = data.audio[0];
@@ -82,8 +86,8 @@ export default function NewMusicPage() {
           theme: "colored",
           autoClose: 5000,
         });
-        document.getElementById("submit-btn").disabled = false;
-        document.getElementById("info").innerHTML = "";
+        setBtnStatus(false)
+        setInfo("")
       }
     } catch (error) {
       toast("There was an error uploading the music try again", {
@@ -91,8 +95,8 @@ export default function NewMusicPage() {
         theme: "colored",
         autoClose: 5000,
       });
-      document.getElementById("submit-btn").disabled = false;
-      document.getElementById("info").innerHTML = "";
+      setBtnStatus(false)
+        setInfo("")
     }
   }
 
@@ -183,7 +187,7 @@ export default function NewMusicPage() {
             ></textarea>
           </div>
 
-          <button id="submit-btn" type="submit" className="btn btn-primary">
+          <button id="submit-btn" type="submit" className="btn btn-primary" disabled={btnStatus}>
             Upload Music
           </button>
         </form>
