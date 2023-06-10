@@ -8,7 +8,7 @@ export default async function Songs({ promise }: Param) {
   const musics = await promise;
   const content = musics.map((music) => {
     return (
-      <div key={music.id} className="col-md-4 ">
+      <div key={music.id} className="col-md-3 d-flex align-items-stretch">
         <MusicCard
           id={music.id}
           audio={music.audio}

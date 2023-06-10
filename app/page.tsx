@@ -1,11 +1,16 @@
 import { fetchAllMusics } from "@/utils/utilities";
-import { Suspense } from "react";
+import { Suspense, useEffect } from "react";
 import Songs from "@/components/Musics";
 import Navbar from "@/components/Navbar";
 
 export default async function Home() {
-  const data = await fetchAllMusics();
-  const music = JSON.parse(data)
+  let data = await fetchAllMusics();
+  let music = JSON.parse(data)
+
+  // useEffect(()=> {
+  //   data = await
+  // },[])
+  
   return (
     <>
     <Navbar/>
