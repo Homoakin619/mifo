@@ -1,12 +1,11 @@
 import { fetchAllMusics } from "@/utils/utilities";
-import { Suspense, useEffect } from "react";
+import { Suspense } from "react";
 import Songs from "@/components/Musics";
 import Navbar from "@/components/Navbar";
 
 export default async function Home() {
   let data: Promise<MusicProps[]> =  fetchAllMusics();
-  // let music = JSON.parse(data)
-
+  
   
   return (
     <>

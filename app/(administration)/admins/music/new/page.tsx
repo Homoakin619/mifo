@@ -14,6 +14,9 @@ export default function NewMusicPage() {
   const router = useRouter()
 
   async function uploadMusic(data: MusicFormPayload) {
+    document.getElementById("submit-btn").disabled = true;
+    document.getElementById("info").innerHTML = "Processing upload please wait";
+
     const imageFile = data.image[0];
     const audioFile = data.audio[0];
     const res1 = await fetch("/api/sign", { method: "POST" });
@@ -70,7 +73,7 @@ export default function NewMusicPage() {
             theme: "colored",
             autoClose: 5000,
           });
-          setTimeout(()=>{router.push("/music")},5000)
+          setTimeout(()=>{router.push("/admins/music")},5000)
         }
       } else {
         
@@ -79,6 +82,8 @@ export default function NewMusicPage() {
           theme: "colored",
           autoClose: 5000,
         });
+        document.getElementById("submit-btn").disabled = false;
+        document.getElementById("info").innerHTML = "";
       }
     } catch (error) {
       toast("There was an error uploading the music try again", {
@@ -86,6 +91,8 @@ export default function NewMusicPage() {
         theme: "colored",
         autoClose: 5000,
       });
+      document.getElementById("submit-btn").disabled = false;
+      document.getElementById("info").innerHTML = "";
     }
   }
 
@@ -96,6 +103,7 @@ export default function NewMusicPage() {
     >
       <div className="col-6" style={{ minHeight: "150px" }}>
         <h4>Music Upload Form</h4>
+        <span id="info"></span>
         <form method="POST" onSubmit={handleSubmit(uploadMusic)}>
           <div>
             <span style={{ color: "red" }}>{formError}</span>
@@ -175,7 +183,7 @@ export default function NewMusicPage() {
             ></textarea>
           </div>
 
-          <button type="submit" className="btn btn-primary">
+          <button id="submit-btn" type="submit" className="btn btn-primary">
             Upload Music
           </button>
         </form>

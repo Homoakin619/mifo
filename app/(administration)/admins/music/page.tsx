@@ -3,7 +3,7 @@ import { fetchAllMusics } from "@/utils/utilities";
 import { Suspense } from "react";
 
 const AllMusics = () => {
-  let data: Promise<MusicProps[]> =  fetchAllMusics();
+  let datas: Promise<MusicProps[]> = fetchAllMusics() ;
   
   return (
     <>
@@ -21,7 +21,7 @@ const AllMusics = () => {
       </div>
       <div className="row content">
         <Suspense fallback={<h3>Loading ...</h3>}>
-          <Songs promise={data} />
+          <Songs promise={datas} />
         </Suspense>
       </div>
     </div>
