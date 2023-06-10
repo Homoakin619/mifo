@@ -16,7 +16,7 @@ export async function generateMetadata({
   const music: Promise<any> = fetchMusicByTitle(songId);
   const mus = await music;
   const song = JSON.parse(mus)
-  if (!song?.id) return { title: "Product not Found" };
+  // if (!song?.id) return { title: "Product not Found" };
 
   return {
     title: `MIFO | ${song.title}`,
@@ -26,8 +26,8 @@ export async function generateMetadata({
 
 
 export async function generateStaticParams() {
-  const data = await fetchAllMusics();
-  const musicData: MusicProps[] = JSON.parse(data);
+  const data = fetchAllMusics();
+  const musicData: MusicProps[] = await data;
   return musicData.map((music) => ({ songId: music.title }));
   
 }

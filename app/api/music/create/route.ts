@@ -19,15 +19,16 @@ export const POST = async (req: NextRequest) => {
                 ...data
             })
             await newMusic.save()
-            return new Response(JSON.stringify(newMusic),{status: 201})
+
+            return new NextResponse(JSON.stringify({"message":"Music created successfully"}),{status: 201})
         }else {
-            return new NextResponse("Music exists, choose another title",{status:400})
+            return new NextResponse(JSON.stringify({"message":"Music exists, choose another title"}),{status:400})
         }
         
     } catch (error) {
         console.log(error);
         
-        return new NextResponse(""+error,{status: 400})
+        return new NextResponse(JSON.stringify({"message":""+error}),{status: 400})
     }
     // return new Response("hello",{status: 201})
 }

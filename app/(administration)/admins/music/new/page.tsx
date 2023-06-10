@@ -1,4 +1,5 @@
 "use client";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast, ToastContainer } from "react-toastify";
@@ -10,6 +11,7 @@ export default function NewMusicPage() {
   const cloudname = process.env.NEXT_PUBLIC_CLOUDINARY_NAME;
   const [formError, setFormError] = useState("");
   const [success, setSuccess] = useState("");
+  const router = useRouter()
 
   async function uploadMusic(data: MusicFormPayload) {
     const imageFile = data.image[0];
@@ -68,6 +70,7 @@ export default function NewMusicPage() {
             theme: "colored",
             autoClose: 5000,
           });
+          setTimeout(()=>{router.push("/music")},5000)
         }
       } else {
         

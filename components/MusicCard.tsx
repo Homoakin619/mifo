@@ -30,7 +30,7 @@ export default function MusicCard({
         <div className="d-flex justify-content-end">
           <a
             className="btn btn-link link-success p-md-1 my-1"
-            href={"/" + title}
+            href={"/songs/"+title}
             role="button"
             aria-expanded="false"
             aria-controls="collapseContent"

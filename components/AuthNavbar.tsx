@@ -2,7 +2,7 @@
 import { signOut, useSession } from "next-auth/react";
 
 export default function AuthNavbar() {
-    const {data:session} = useSession()
+  const { data: session } = useSession();
 
   return (
     <nav className="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
@@ -22,13 +22,30 @@ export default function AuthNavbar() {
         >
           <span className="navbar-toggler-icon"></span>
         </button>
-       
-          <div className="collapse navbar-collapse" id="navbarText">
-            <ul className="navbar-nav me-auto mb-2 mb-lg-0"></ul>
-            <span className="navbar-text me-3">Welcome {session?.user.username}!</span>
-            <a className="btn btn-sm btn-danger" onClick={() => signOut({callbackUrl:"/"})}>Log Out</a>
-          </div>
-        
+
+        <div className="collapse navbar-collapse" id="navbarText">
+          <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+            <li className="nav-item">
+              <a className="nav-link active" aria-current="page" href="/admins/music">
+                Home
+              </a>
+            </li>
+            <li className="nav-item">
+              <a className="nav-link active" aria-current="page" href="/admins/music/new">
+                Create Product
+              </a>
+            </li>
+          </ul>
+          <span className="navbar-text me-3">
+            Welcome {session?.user.username}!
+          </span>
+          <a
+            className="btn btn-sm btn-danger"
+            onClick={() => signOut({ callbackUrl: "/" })}
+          >
+            Log Out
+          </a>
+        </div>
       </div>
     </nav>
   );

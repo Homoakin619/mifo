@@ -13,13 +13,10 @@ export default async function createUser(data: AuthType) {
         if (data.password) {
             password_hash = bcrypt.hashSync(data.password, 10);
         }
-    
         const user_data = {username: data.username,password_hash: password_hash}
         const user = new User(user_data);
-        
         await user.save();
     }
-    
         return {status: 200}
     }catch(error) {
         console.log(error)
@@ -37,13 +34,18 @@ export async function fetchAllMusics() {
         item.date_released = release.toString()
         result.push(item.toJSON())
     })
-    return JSON.stringify(result);
+    return result;
+    // return JSON.stringify(result);
 }
 
 
 export async function fetchMusicByTitle(title: string) {
     await connectDb();
+    console.log(title);
+    
     const query = await Music.findOne({title: title});
+    console.log(query);
+    
     const release = query.date_released
     query.date_released = release.toString()
     query.toJSON();

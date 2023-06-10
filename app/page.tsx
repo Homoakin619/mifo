@@ -4,12 +4,9 @@ import Songs from "@/components/Musics";
 import Navbar from "@/components/Navbar";
 
 export default async function Home() {
-  let data = await fetchAllMusics();
-  let music = JSON.parse(data)
+  let data: Promise<MusicProps[]> =  fetchAllMusics();
+  // let music = JSON.parse(data)
 
-  // useEffect(()=> {
-  //   data = await
-  // },[])
   
   return (
     <>
@@ -27,7 +24,7 @@ export default async function Home() {
       </div>
       <div className="row content">
         <Suspense fallback={<h3>Loading ...</h3>}>
-          <Songs promise={music} />
+          <Songs promise={data} />
         </Suspense>
       </div>
     </div>
