@@ -24,7 +24,7 @@ const AllMusics = async () => {
       </div>
       <div className="row content">
         <Suspense fallback={<h3>Loading ...</h3>}>
-          <Songs promise={datas} />
+          <Songs user="admin" promise={datas} />
         </Suspense>
       </div>
     </div>

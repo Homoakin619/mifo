@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { fetchAllMusics, fetchMusicByTitle } from "@/utils/utilities";
 import MusicCard from "@/components/MusicCard";
+import MusicDisplayCard from "@/components/MusicDisplayCard";
 
 
 type Param = {
@@ -13,10 +14,12 @@ type Param = {
 export async function generateMetadata({
   params: { songId },
 }: Param): Promise<Metadata> {
+  console.log("SongId: ---==> "+songId);
+  
   const music: Promise<any> = fetchMusicByTitle(songId);
   const mus = await music;
   const song = JSON.parse(mus)
-  // if (!song?.id) return { title: "Product not Found" };
+  if (!song?.id) return { title: "Product not Found" };
 
   return {
     title: `MIFO | ${song.title}`,
@@ -32,7 +35,7 @@ export async function generateStaticParams() {
   
 }
 
-export default async function ProductPage({ params: { songId } }: Param) {
+export default async function MusicDisplayPage({ params: { songId } }: Param) {
   const productData: Promise<any> = fetchMusicByTitle(songId);
   const musc = await productData;
   const music = JSON.parse(musc)
@@ -45,7 +48,7 @@ export default async function ProductPage({ params: { songId } }: Param) {
     <div className="item-detail d-flex align-items-center flex-column justify-content-center">
       <div className="col-md-3 align-items-stretch mb-3">
         
-        <MusicCard
+        <MusicDisplayCard
           id={music.id}
           audio={music.audio}
           title={music.title}

@@ -3,7 +3,7 @@ import { Suspense } from "react";
 import Songs from "@/components/Musics";
 import Navbar from "@/components/Navbar";
 
-export const revalidate = 60
+export const revalidate = 600
 
 export default async function Home() {
   let data: Promise<MusicProps[]> =  fetchAllMusics();
@@ -24,7 +24,7 @@ export default async function Home() {
       </div>
       <div className="row content">
         <Suspense fallback={<h3>Loading ...</h3>}>
-          <Songs promise={data} />
+          <Songs user="user" promise={data} />
         </Suspense>
       </div>
     </div>

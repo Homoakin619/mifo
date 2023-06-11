@@ -42,10 +42,10 @@ export async function fetchAllMusics() {
 
 export async function fetchMusicByTitle(title: string) {
     await connectDb();
-    console.log(title);
+    console.log("Title: ==> "+title);
     
     const query = await Music.findOne({title: title});
-    console.log(query);
+    console.log("Query: ==> "+query);
     
     const release = query.date_released
     query.date_released = release.toString()

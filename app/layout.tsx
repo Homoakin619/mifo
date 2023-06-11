@@ -3,6 +3,7 @@ import "bootstrap/dist/css/bootstrap.css";
 import "./globals.css";
 import 'react-toastify/dist/ReactToastify.css';
 import Provider from "@/components/Provider";
+import Script from "next/script";
 
 export const metadata = {
   title: "MIFO",
@@ -30,6 +31,7 @@ export default function RootLayout({
         <Provider session={session} >
         {children}
         </Provider>
+        <Script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"></Script>
       </body>
     </html>
   );
