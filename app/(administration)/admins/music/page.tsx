@@ -2,8 +2,11 @@ import Songs from "@/components/Musics";
 import { fetchAllMusics } from "@/utils/utilities";
 import { Suspense } from "react";
 
-const AllMusics = () => {
+export const revalidate = 60
+
+const AllMusics = async () => {
   let datas: Promise<MusicProps[]> = fetchAllMusics() ;
+  
   
   return (
     <>

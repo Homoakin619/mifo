@@ -28,7 +28,8 @@ export default async function createUser(data: AuthType) {
 export async function fetchAllMusics() {
     await connectDb();
     const query = await Music.find({});
-    const result: any[] = [];
+    const result: MusicProps[] = [];
+    
     query.map((item)=> {
         const release = item.date_released
         item.date_released = release.toString()
