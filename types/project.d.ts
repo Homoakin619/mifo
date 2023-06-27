@@ -26,5 +26,6 @@ type MusicProps = {
     audio: string,
     image: string,
     singer: string,
-    date_released: string
+    date_released: string,
+    slug: string,
 }

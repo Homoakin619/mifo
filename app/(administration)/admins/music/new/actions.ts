@@ -24,10 +24,6 @@ export async function processPost(data) {
     })
 
     return res.json()
-    if (res.ok) {
-
-    }
-    
 }
 
 export async function uploadImage(imageObject: any) {

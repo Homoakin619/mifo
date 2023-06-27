@@ -20,7 +20,14 @@ export default function NewMusicPage() {
       setBtnStatus(true)
       setInfo("Processing upload please wait")
     }
+    let submitButton = document.getElementById("submitBtn") as HTMLButtonElement
+    let uploadText = document.getElementById("uploadText") as HTMLElement
+    let loader = document.getElementById("loader") as HTMLElement
 
+    submitButton.disabled = true;
+    uploadText.style.display = "none";
+    loader.style.display = "inline";
+    
     const imageFile = data.image[0];
     const audioFile = data.audio[0];
     const res1 = await fetch("/api/sign", { method: "POST" });
@@ -86,8 +93,9 @@ export default function NewMusicPage() {
           theme: "colored",
           autoClose: 5000,
         });
-        setBtnStatus(false)
-        setInfo("")
+        submitButton.disabled = false;
+        uploadText.style.display = "block";
+        loader.style.display = "none";
       }
     } catch (error) {
       toast("There was an error uploading the music try again", {
@@ -95,8 +103,9 @@ export default function NewMusicPage() {
         theme: "colored",
         autoClose: 5000,
       });
-      setBtnStatus(false)
-        setInfo("")
+      submitButton.disabled = false;
+      uploadText.style.display = "block";
+      loader.style.display = "none";
     }
   }
 
@@ -187,8 +196,12 @@ export default function NewMusicPage() {
             ></textarea>
           </div>
 
-          <button id="submit-btn" type="submit" className="btn btn-primary" disabled={btnStatus}>
-            Upload Music
+          <button id="submitBtn" type="submit" className="btn btn-primary" >
+            <span id="uploadText">Upload Music</span>
+            <span id="loader" style={{display: "none"}}>
+            <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+            &nbsp; Uploading...
+            </span>
           </button>
         </form>
       </div>

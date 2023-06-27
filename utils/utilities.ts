@@ -40,11 +40,11 @@ export async function fetchAllMusics() {
 }
 
 
-export async function fetchMusicByTitle(title: string) {
+export async function fetchMusicBySlug(slug: string) {
     await connectDb();
-    console.log("Title: ==> "+title);
+    console.log("Title: ==> "+slug);
     
-    const query = await Music.findOne({title: title});
+    const query = await Music.findOne({slug: slug});
     console.log("Query: ==> "+query);
     
     const release = query.date_released

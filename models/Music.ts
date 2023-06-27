@@ -18,6 +18,10 @@ const MusicSchema = new Schema({
         type: String,
         required: [false]
     },
+    slug: {
+        type: String,
+        required: [true,"Slug is required"]
+    },
     audio: {
         type: String,
         required: [true,"Add the audio link"]

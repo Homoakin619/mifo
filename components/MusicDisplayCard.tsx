@@ -13,7 +13,7 @@ export default function MusicDisplayCard({
           data-mdb-ripple-color="light"
         >
           <img className="img-fluid border" src={image} alt="Card image cap" />
-          <a href="#!">
+          <a href="#">
             <div
               className="mask"
               style={{ background: "rgba(251, 251, 251, 0.15)" }}

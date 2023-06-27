@@ -32,7 +32,7 @@ export default function AuthNavbar() {
             </li>
             <li className="nav-item">
               <a className="nav-link active" aria-current="page" href="/admins/music/new">
-                Create Product
+                Create Music
               </a>
             </li>
           </ul>

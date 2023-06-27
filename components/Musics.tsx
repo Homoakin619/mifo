@@ -31,6 +31,7 @@ export default async function Songs({ promise,user }: Param) {
          singer={music.singer}
          date_released={music.date_released}
          image={music.image}
+         slug={music.slug}
        />:
        <MusicCard
        id={music.id}
@@ -40,12 +41,13 @@ export default async function Songs({ promise,user }: Param) {
        singer={music.singer}
        date_released={music.date_released}
        image={music.image}
+       slug={music.slug}
      />
         }
       </div>
     );
   });
-  return musics.length ? content : <h3>There are no products to show</h3>;
+  return musics.length ? content : <h3>There are no Music to show</h3>;
 }
 
 // 2111870097

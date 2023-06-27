@@ -4,7 +4,7 @@ export default function AdminMusicCard({
     description,
     image,
     singer,
-    date_released,
+    date_released,slug
   }: MusicProps) {
     return (
       <div className="card shadow ">
@@ -30,7 +30,7 @@ export default function AdminMusicCard({
           <div className="d-flex justify-content-end">
             <a
               className="btn btn-link link-success p-md-1 my-1"
-              href={title}
+              href={slug}
               role="button"
               aria-expanded="false"
               aria-controls="collapseContent"
