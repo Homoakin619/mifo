@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { fetchAllMusics, fetchMusicByTitle } from "@/utils/utilities";
+import { fetchAllMusics, fetchMusicBySlug } from "@/utils/utilities";
 import MusicCard from "@/components/MusicCard";
 import MusicDisplayCard from "@/components/MusicDisplayCard";
 
@@ -14,9 +14,8 @@ type Param = {
 export async function generateMetadata({
   params: { songId },
 }: Param): Promise<Metadata> {
-  console.log("SongId: ---==> "+songId);
   
-  const music: Promise<any> = fetchMusicByTitle(songId);
+  const music: Promise<any> = fetchMusicBySlug(songId);
   const mus = await music;
   const song = JSON.parse(mus)
   if (!song?.id) return { title: "Product not Found" };
@@ -31,12 +30,12 @@ export async function generateMetadata({
 export async function generateStaticParams() {
   const data = fetchAllMusics();
   const musicData: MusicProps[] = await data;
-  return musicData.map((music) => ({ songId: music.title }));
+  return musicData.map((music) => ({ songId: music.slug }));
   
 }
 
 export default async function MusicDisplayPage({ params: { songId } }: Param) {
-  const productData: Promise<any> = fetchMusicByTitle(songId);
+  const productData: Promise<any> = fetchMusicBySlug(songId);
   const musc = await productData;
   const music = JSON.parse(musc)
 
@@ -56,6 +55,7 @@ export default async function MusicDisplayPage({ params: { songId } }: Param) {
           singer={music.singer}
           date_released={music.date_released}
           image={music.image}
+          slug={music.slug}
         />
       </div>
       <div>
