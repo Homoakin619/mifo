@@ -9,7 +9,7 @@ export default function Login() {
   const loginForm = useForm<AuthType>();
   const { register, handleSubmit } = loginForm;
   const params = useSearchParams();
-  const callbackUrl = params.get("callbackUrl") ?? "/admins/music/new";
+  const callbackUrl = params.get("callbackUrl") || "/admins/music/new";
   const [formError, setFormError] = useState("");
   const [success, setSuccess] = useState("");
   const { data: session } = useSession();
